@@ -1,0 +1,8 @@
+{
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": ".prettierrc"
+    }
+  ]
+}

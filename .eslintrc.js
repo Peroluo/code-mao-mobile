@@ -15,12 +15,7 @@ const eslintrc = {
       experimentalObjectRestSpread: true,
     },
   },
-  plugins: [
-    'markdown',
-    'react',
-    'babel',
-    'jsx-a11y',
-  ],
+  plugins: ['markdown', 'react', 'babel', 'jsx-a11y'],
   rules: {
     'class-methods-use-this': 0,
     'func-names': 0,
