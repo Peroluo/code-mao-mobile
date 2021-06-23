@@ -95,37 +95,25 @@ module.exports = {
     useHD: process.env.HD_ENV === 'hd',
   },
   themeConfig: {
-    siteTitle: 'Ant Design Mobile',
-    siteSubTitle: '支付宝移动端组件库',
+    siteTitle: 'Code Mao Mobile',
+    siteSubTitle: '编程猫移动端组件库',
     indexDemos: ['drawer'], // for kitchen 这些组件每个 demo 都需要全屏展示，首页直接放其各个 demo 链接
     subListDemos: ['list-view', 'pull-to-refresh', 'tab-bar'], // for kitchen 这些组件每个 demo 都需要全屏展示，首页直接放其各个 demo 链接
     hashSpliter: '-demo-', // for kitchen URL 中记录到 hash 里的特殊标记
     categoryOrder: [
-      'Layout',
-      'Navigation',
-      'Data Entry',
-      'Data Display',
-      'Feedback',
-      'Gesture',
-      'Combination',
-      'Other',
+      'Base Components',
+      'Business Components',
     ],
     cateChinese: {
-      Layout: '布局',
-      Navigation: '导航',
-      'Data Entry': '数据录入',
-      'Data Display': '数据展示',
-      Feedback: '操作反馈',
-      Gesture: '手势',
-      Combination: '组合组件',
-      Other: '其他',
+      'Base Components': '基础组件',
+      'Business Components': '业务组件',
     },
-    docVersions: {
-      '0.7.x': 'http://07x.mobile.ant.design',
-      '0.8.x': 'http://08x.mobile.ant.design',
-      '0.9.x': 'http://09x.mobile.ant.design',
-      '1.x': 'http://1x.mobile.ant.design',
-    },
+    // docVersions: {
+    //   '0.7.x': 'http://07x.mobile.ant.design',
+    //   '0.8.x': 'http://08x.mobile.ant.design',
+    //   '0.9.x': 'http://09x.mobile.ant.design',
+    //   '1.x': 'http://1x.mobile.ant.design',
+    // },
   },
   devServerConfig: {
     disableHostCheck: true,

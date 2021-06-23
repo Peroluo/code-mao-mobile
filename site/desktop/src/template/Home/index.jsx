@@ -2,7 +2,6 @@ import 'react-github-button/assets/style.css';
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link } from 'bisheng/router';
-import GitHubButton from 'react-github-button';
 import { injectIntl } from 'react-intl';
 import { Popover, Button, Row, Col } from 'antd';
 import * as utils from '../../../../utils';
@@ -49,7 +48,7 @@ class Home extends React.Component {
           <section className="home-s1">
             <div className="banner-wrapper">
               <div className="banner-text-wrapper">
-                <h2 key="h2">Ant Design Mobile</h2>
+                <h2 key="h2">Code Mao Mobile</h2>
                 <p>{this.props.intl.formatMessage({ id: 'app.home.epitomize' })}</p>
                 <div key="button1" className="start-button">
                   <Link to={`/docs/react/introduce${isZhCN ? '-cn' : ''}`}>
@@ -68,22 +67,22 @@ class Home extends React.Component {
                       {this.props.intl.formatMessage({ id: 'app.home.qrtip' })}
                     </Button>
                   </Popover>
-                  <GitHubButton
+                  {/* <GitHubButton
                     key="github-button"
                     type="stargazers"
                     namespace="ant-design"
                     repo="ant-design-mobile"
-                  />
+                  /> */}
                 </div>
               </div>
-              <div className="ant-angular">
+              {/* <div className="ant-angular">
                 <a
                   dangerouslySetInnerHTML={{ __html: 'Ant Design Mobile of Angular >' }}
                   target="_blank"
                   rel="noopener noreferrer"
                   href="//ng.mobile.ant.design/"
                 />
-              </div>
+              </div> */}
             </div>
           </section>
           <section className="home-s2">
