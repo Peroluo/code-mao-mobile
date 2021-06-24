@@ -1,0 +1,1 @@
+webpackJsonp([18],{1389:function(e,n){e.exports={content:["section",["p","To trigger an operation."]],meta:{category:"Components",type:"Business Components",title:"Address",filename:"components/address/index.en-US.md"},toc:["ul",["li",["a",{className:"bisheng-toc-h2",href:"#API",title:"API"},"API"]]],api:["section",["h2","API"]]}}});
