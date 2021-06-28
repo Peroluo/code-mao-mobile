@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CSSSplitWebpackPlugin = require('css-split-webpack-plugin').default;
 const replaceLib = require('antd-tools/lib/replaceLib');
+const pkg = require('../package.json');
 
 const useReact = process.env.DEMO_ENV === 'react';
 const isDev = process.env.NODE_ENV === 'development';
@@ -66,8 +67,8 @@ module.exports = {
 
     // 文档展示的组件指向components/*
     config.resolve.alias = {
-      'lbk-common-components/lib': path.join(process.cwd(), 'components'),
-      'lbk-common-components': process.cwd(),
+      [`${pkg.name}/lib`]: path.join(process.cwd(), 'components'),
+      [`${pkg.name}`]: process.cwd(),
       site: path.join(process.cwd(), 'site'),
     };
     if (!useReact) {
@@ -111,12 +112,6 @@ module.exports = {
       'Base Components': '基础组件',
       'Business Components': '业务组件',
     },
-    // docVersions: {
-    //   '0.7.x': 'http://07x.mobile.ant.design',
-    //   '0.8.x': 'http://08x.mobile.ant.design',
-    //   '0.9.x': 'http://09x.mobile.ant.design',
-    //   '1.x': 'http://1x.mobile.ant.design',
-    // },
   },
   devServerConfig: {
     disableHostCheck: true,

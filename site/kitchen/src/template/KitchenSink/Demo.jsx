@@ -1,14 +1,14 @@
 /* eslint react/no-danger: 0 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WhiteSpace from 'lbk-common-components/lib/white-space';
-import 'lbk-common-components/lib/white-space/style';
-import Button from 'lbk-common-components/lib/button';
-import 'lbk-common-components/lib/button/style';
-import WingBlank from 'lbk-common-components/lib/wing-blank';
-import 'lbk-common-components/lib/wing-blank/style';
-import NoticeBar from 'lbk-common-components/lib/notice-bar';
-import 'lbk-common-components/lib/notice-bar/style';
+import WhiteSpace from 'code-mao-mobile/lib/white-space';
+import 'code-mao-mobile/lib/white-space/style';
+import Button from 'code-mao-mobile/lib/button';
+import 'code-mao-mobile/lib/button/style';
+import WingBlank from 'code-mao-mobile/lib/wing-blank';
+import 'code-mao-mobile/lib/wing-blank/style';
+import NoticeBar from 'code-mao-mobile/lib/notice-bar';
+import 'code-mao-mobile/lib/notice-bar/style';
 import collect from 'bisheng/collect';
 
 @collect(async (nextProps) => {

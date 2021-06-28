@@ -3,10 +3,10 @@
 
 import React from 'react';
 
-import List from 'lbk-common-components/lib/list';
-import 'lbk-common-components/lib/list/style';
-import Icon from 'lbk-common-components/lib/icon';
-import 'lbk-common-components/lib/icon/style';
+import List from 'code-mao-mobile/lib/list';
+import 'code-mao-mobile/lib/list/style';
+import Icon from 'code-mao-mobile/lib/icon';
+import 'code-mao-mobile/lib/icon/style';
 import '../../static/style';
 import { getQuery, injectPreactDevtool } from '../../../../utils';
 import _config from '../../../../config';

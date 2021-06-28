@@ -4,4 +4,3 @@ components/*/__tests__/type.tsx
 !.eslintrc.js
 !components/*/__tests__/**/*.js
 !components/*/demo/*
-example

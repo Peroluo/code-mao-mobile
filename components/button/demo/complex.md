@@ -6,7 +6,7 @@ title: 应用场景示例
 examples with List / Flex
 
 ````jsx
-import { Button, List } from 'lbk-common-components';
+import { Button, List } from 'code-mao-mobile';
 
 const ComplexButtonDemo = () => (
   <List style={{ margin: '5px 0', backgroundColor: 'white' }}>

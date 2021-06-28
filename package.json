@@ -1,5 +1,5 @@
 {
-  "name": "lbk-common-components",
+  "name": "code-mao-mobile",
   "version": "0.0.1",
   "description": "录播课组件库",
   "homepage": "http://mobile.ant.design",
@@ -16,17 +16,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.codemao.cn/frontend/rocket/operational/dependencies/lbk-common-components"
+    "url": "https://github.com/Peroluo/code-mao-mobile"
   },
   "bugs": {
-    "url": "https://gitlab.codemao.cn/frontend/rocket/operational/dependencies/lbk-common-components/-/issues"
+    "url": "https://github.com/Peroluo/code-mao-mobile/issues"
   },
   "files": [
     "dist",
     "lib",
     "es"
   ],
-  "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
   "dependencies": {

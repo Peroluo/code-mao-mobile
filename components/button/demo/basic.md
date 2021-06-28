@@ -6,7 +6,7 @@ title: '类型、尺寸'
 button
 
 ````jsx
-import { Button, WhiteSpace, WingBlank } from 'lbk-common-components';
+import { Button, WhiteSpace, WingBlank } from 'code-mao-mobile';
 
 const ButtonExample = () => (
   <WingBlank>
