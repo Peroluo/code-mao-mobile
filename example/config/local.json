@@ -1,0 +1,20 @@
+{
+  "env": "local",
+  "buildtime": {
+    "https": false,
+    "cdn_path": "http://localhost:7101/",
+    "originServer": {
+      "ip": "0.0.0.0",
+      "port": "7101"
+    },
+    "debug": false,
+    "hot": false,
+    "sourceMap": "http://localhost:7101/",
+    "uglify": true,
+    "analyze": false
+  },
+  "runtime": {
+    "env": "local",
+    "imEnv": "local"
+  }
+}

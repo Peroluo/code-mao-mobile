@@ -2,7 +2,6 @@ import React from 'react';
 import { StickyContainer, Sticky } from 'react-sticky';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import { FormattedMessage } from 'react-intl';
 import Icon from 'antd/lib/icon';
 import Popover from 'antd/lib/popover';
 import QRCode from 'qrcode.react';
@@ -110,19 +109,18 @@ export default class ComponentDoc extends React.Component {
     const PopoverContent = (
       <div>
         <h4 style={{ margin: '8Px 0 12Px', textAlign: 'center' }}>
-          <FormattedMessage id="app.ComponentDoc.codeQrcode" />
+            扫二维码查看演示效果
         </h4>
         <QRCode size={144} value={demoUrl} />
       </div>
     );
 
     const {
-      title, subtitle, chinese, english,
+      title, subtitle, chinese,
     } = meta;
     const hash = `#${path}-demo-${currentIndex}`;
     const mainPath = isLocalMode ? 'components' : 'kitchen-sink/components';
-    const search = this.context.intl.locale === 'zh-CN' ? '?lang=zh-CN' : '?lang=en-US';
-    const iframeUrl = `${protocol}//${host}/${mainPath}/${path}${search}${hash}`;
+    const iframeUrl = `${protocol}//${host}/${mainPath}/${path}?${hash}`;
 
     const codeContainerCls = classnames('clearfix demo-code-container', {
       'demo-code-container-mutli': this.state.inMultiDemoMode,
@@ -130,7 +128,7 @@ export default class ComponentDoc extends React.Component {
     });
 
     return (
-      <DocumentTitle title={`${subtitle || chinese || ''} ${title || english} - Ant Design`}>
+      <DocumentTitle title={`${subtitle || chinese || ''} - ${title}`}>
         <article>
           <section className="markdown">
             <h1 className="section-title">
@@ -146,7 +144,7 @@ export default class ComponentDoc extends React.Component {
 
             <section id="demoTitle" className="demo-title-wrapper">
               <h2 id="demoTitle" className="demo-title">
-                <FormattedMessage id="app.ComponentDoc.codeTitle" />
+                代码演示
               </h2>
             </section>
           </section>
@@ -175,7 +173,7 @@ export default class ComponentDoc extends React.Component {
                               <section className="code-box-demo code-box-demo-preview">
                                 <iframe id="demoFrame"
                                   name="demoFrame"
-                                  title="antd-mobile"
+                                  title="lbk-common-components"
                                   style={{
                                     width: '377Px',
                                     height: '548Px',

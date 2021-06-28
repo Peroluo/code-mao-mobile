@@ -1,0 +1,6 @@
+{
+  "extends": "@mlz/lint/stylelintrc.json",
+  "rules": {
+      "max-nesting-depth": 6
+  }
+}

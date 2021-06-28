@@ -1,11 +1,9 @@
+/* eslint-disable react/no-danger */
 import 'react-github-button/assets/style.css';
 import React from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link } from 'bisheng/router';
-import GitHubButton from 'react-github-button';
-import { injectIntl } from 'react-intl';
 import { Popover, Button, Row, Col } from 'antd';
-import * as utils from '../../../../utils';
 
 function getStyle() {
   return `
@@ -25,18 +23,7 @@ function getStyle() {
 }
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    const { pathname } = props.location;
-    const isZhCN = utils.isZhCN(pathname);
-    this.state = {
-      isZhCN,
-    };
-  }
-
   render() {
-    const { isZhCN } = this.state;
-
     const addSeparater = (str) => {
       const arr = str.split('|');
       // arr.splice(1, 0 <span>|</span>)
@@ -44,17 +31,17 @@ class Home extends React.Component {
     };
 
     return (
-      <DocumentTitle title={`Ant Design Mobile - ${this.props.intl.formatMessage({ id: 'app.home.slogan' })}`}>
+      <DocumentTitle title={'Lbk Components - 录播课组件库'}>
         <div className="main-wrapper">
           <section className="home-s1">
             <div className="banner-wrapper">
               <div className="banner-text-wrapper">
-                <h2 key="h2">Ant Design Mobile</h2>
-                <p>{this.props.intl.formatMessage({ id: 'app.home.epitomize' })}</p>
+                <h2 key="h2">Lbk Components</h2>
+                <p>一个基于 React / Preact 的 UI 组件库</p>
                 <div key="button1" className="start-button">
-                  <Link to={`/docs/react/introduce${isZhCN ? '-cn' : ''}`}>
+                  <Link to={'/docs/react/introduce'}>
                     <Button type="primary" size="large">
-                      {this.props.intl.formatMessage({ id: 'app.home.centerStart' })}
+                        开始探索
                     </Button>
                   </Link>
                   <Popover
@@ -65,43 +52,29 @@ class Home extends React.Component {
                     }
                   >
                     <Button type="primary" ghost>
-                      {this.props.intl.formatMessage({ id: 'app.home.qrtip' })}
+                      扫码演示
                     </Button>
                   </Popover>
-                  <GitHubButton
-                    key="github-button"
-                    type="stargazers"
-                    namespace="ant-design"
-                    repo="ant-design-mobile"
-                  />
                 </div>
-              </div>
-              <div className="ant-angular">
-                <a
-                  dangerouslySetInnerHTML={{ __html: 'Ant Design Mobile of Angular >' }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="//ng.mobile.ant.design/"
-                />
               </div>
             </div>
           </section>
           <section className="home-s2">
             <div className="wrapper">
-              <h3>{this.props.intl.formatMessage({ id: 'app.home.s2_title' })}</h3>
+              <h3>懂你所需</h3>
               <Row gutter={72} style={{ marginBottom: 80 }}>
                 <Col span={12}>
                   <img src="https://gw.alipayobjects.com/zos/rmsportal/KUmyjoMxFFbjEdjiIWOw.png" alt="" />
                   <div className="des">
-                    <div>{addSeparater(this.props.intl.formatMessage({ id: 'app.home.s2_des1' }))}</div>
-                    <p>{this.props.intl.formatMessage({ id: 'app.home.s2_des10' })}</p>
+                    <div>{addSeparater('组件丰富 | 功能全面')}</div>
+                    <p>提供了 40+ 基础组件、覆盖各类场景，组件特性丰富、满足各种功能需求。</p>
                   </div>
                 </Col>
                 <Col span={12}>
                   <img src="https://gw.alipayobjects.com/zos/rmsportal/hfFgCpcxpGjeAlXFFgyT.png" alt="" />
                   <div className="des">
-                    <div>{addSeparater(this.props.intl.formatMessage({ id: 'app.home.s2_des2' }))}</div>
-                    <p>{this.props.intl.formatMessage({ id: 'app.home.s2_des20' })}</p>
+                    <div>{addSeparater('一步上手 | 按需加载')}</div>
+                    <p>上手足够简单，既可以一次加载所有代码、也可以只加载用到的某几个组件的代码、避免冗余。</p>
                   </div>
                 </Col>
               </Row>
@@ -109,55 +82,16 @@ class Home extends React.Component {
                 <Col span={12}>
                   <img src="https://gw.alipayobjects.com/zos/rmsportal/nlUNcWIVLKoarLnWNaWS.png" alt="" />
                   <div className="des">
-                    <div>{addSeparater(this.props.intl.formatMessage({ id: 'app.home.s2_des3' }))}</div>
-                    <p>{this.props.intl.formatMessage({ id: 'app.home.s2_des30' })}</p>
+                    <div>{addSeparater('体积小巧 | 性能出众')}</div>
+                    <p>在不损失功能的基础上，尽量保证了单个组件的体积最小、性能最优。</p>
                   </div>
                 </Col>
                 <Col span={12}>
                   <img src="https://gw.alipayobjects.com/zos/rmsportal/JjNULDGGwgOZmsZAqvjH.png" alt="" />
                   <div className="des">
-                    <div>{addSeparater(this.props.intl.formatMessage({ id: 'app.home.s2_des4' }))}</div>
-                    <p>{this.props.intl.formatMessage({ id: 'app.home.s2_des40' })}</p>
+                    <div>简易定制 | 多种风格</div>
+                    <p>支持灵活的样式定制，简易生成多种风格，满足个性化产品需求。</p>
                   </div>
-                </Col>
-              </Row>
-            </div>
-          </section>
-          <section className="home-s3">
-            <div className="wrapper">
-              <h3>
-                <img src="https://gw.alipayobjects.com/zos/rmsportal/EzhXjBHtavGDkTbewrvp.png" alt="" />
-                {this.props.intl.formatMessage({ id: 'app.home.s3_title' })}
-              </h3>
-              <p>{this.props.intl.formatMessage({ id: 'app.home.s3_des' })}</p>
-              <a href="http://p.tb.cn/rmsportal_3436_AntDesignMobile_20Template_20V1.0.sketch">
-                <Button size="large" ghost>{this.props.intl.formatMessage({ id: 'app.home.s3_btn' })}</Button>
-              </a>
-            </div>
-          </section>
-          <section className="home-s4">
-            <div className="wrapper">
-              <h3>{this.props.intl.formatMessage({ id: 'app.home.s4_title' })}</h3>
-              <Row style={{ marginBottom: 48 }}>
-                <Col span={8}>
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/BGcxWbIWmgBlIChNOpqp.png" alt="" />
-                </Col>
-                <Col span={8}>
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/qTKmDWNtAZMaYarVLIZT.png" alt="" />
-                </Col>
-                <Col span={8}>
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/ARwKOjaDethbuHOfMWOW.png" alt="" />
-                </Col>
-              </Row>
-              <Row>
-                <Col span={8}>
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/HinWzLTHESDKjWqvqChF.png" alt="" />
-                </Col>
-                <Col span={8}>
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/MHkXUADpUDavOJfLrMpy.png" alt="" />
-                </Col>
-                <Col span={8}>
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/YEiMaxUWGRExNqYAwQhy.png" alt="" />
                 </Col>
               </Row>
             </div>
@@ -169,4 +103,4 @@ class Home extends React.Component {
   }
 }
 
-export default injectIntl(Home);
+export default Home;

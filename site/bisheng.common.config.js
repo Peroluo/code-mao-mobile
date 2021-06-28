@@ -38,7 +38,7 @@ const prodExternals = useReact ? reactExternals : preactExternals;
 module.exports = {
   filePathMapper(filePath) {
     if (filePath === '/index.html') {
-      return ['/index.html', '/index-cn.html'];
+      return ['/index.html'];
     }
     if (filePath.endsWith('/index.html')) {
       return [filePath, filePath.replace(/\/index\.html$/, '-cn/index.html')];
@@ -48,13 +48,13 @@ module.exports = {
     }
     return filePath;
   },
+  // webpack相关配置
   webpackConfig(config) {
     config.externals = {
       history: 'History',
       'babel-polyfill': 'this', // hack babel-polyfill has no exports
     };
-    // dev 环境下统一不 external
-    // 因为 preact/devtools 未提供 umd
+    // dev 环境下统一不 external 因为 preact/devtools 未提供 umd
     if (!isDev) {
       config.externals = Object.assign(config.externals, prodExternals);
     } else {
@@ -64,9 +64,10 @@ module.exports = {
     alertBabelConfig(config.module.rules);
     config.plugins.push(new CSSSplitWebpackPlugin({ size: 4000 }));
 
+    // 文档展示的组件指向components/*
     config.resolve.alias = {
-      'antd-mobile/lib': path.join(process.cwd(), 'components'),
-      'antd-mobile': process.cwd(),
+      'lbk-common-components/lib': path.join(process.cwd(), 'components'),
+      'lbk-common-components': process.cwd(),
       site: path.join(process.cwd(), 'site'),
     };
     if (!useReact) {
@@ -95,36 +96,20 @@ module.exports = {
     useHD: process.env.HD_ENV === 'hd',
   },
   themeConfig: {
-    siteTitle: 'Ant Design Mobile',
-    siteSubTitle: '支付宝移动端组件库',
+    siteTitle: 'Lbk Component',
+    siteSubTitle: '录播课移动端组件库',
     indexDemos: ['drawer'], // for kitchen 这些组件每个 demo 都需要全屏展示，首页直接放其各个 demo 链接
     subListDemos: ['list-view', 'pull-to-refresh', 'tab-bar'], // for kitchen 这些组件每个 demo 都需要全屏展示，首页直接放其各个 demo 链接
     hashSpliter: '-demo-', // for kitchen URL 中记录到 hash 里的特殊标记
+    // 组件分类
     categoryOrder: [
-      'Layout',
-      'Navigation',
-      'Data Entry',
-      'Data Display',
-      'Feedback',
-      'Gesture',
-      'Combination',
-      'Other',
+      'Base Components',
+      'Business Components',
     ],
+    // 分类名称
     cateChinese: {
-      Layout: '布局',
-      Navigation: '导航',
-      'Data Entry': '数据录入',
-      'Data Display': '数据展示',
-      Feedback: '操作反馈',
-      Gesture: '手势',
-      Combination: '组合组件',
-      Other: '其他',
-    },
-    docVersions: {
-      '0.7.x': 'http://07x.mobile.ant.design',
-      '0.8.x': 'http://08x.mobile.ant.design',
-      '0.9.x': 'http://09x.mobile.ant.design',
-      '1.x': 'http://1x.mobile.ant.design',
+      'Base Components': '基础组件',
+      'Business Components': '业务组件',
     },
   },
   devServerConfig: {

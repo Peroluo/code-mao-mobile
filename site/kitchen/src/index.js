@@ -11,7 +11,7 @@ const pluginAntdConfig = {
       [
         require.resolve('babel-plugin-import'), {
           style: true,
-          libraryName: 'antd-mobile',
+          libraryName: 'lbk-common-components',
           libraryDirectory: 'components',
         },
       ],

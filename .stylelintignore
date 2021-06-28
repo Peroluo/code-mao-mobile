@@ -1,0 +1,24 @@
+# 测试和打包目录
+/test/
+/dist/
+/build/
+
+# node_modules
+node_modules
+
+
+site
+
+.eslintrc.js
+
+# 其他类型的文件
+*.ts
+*.js
+*.png
+*.eot
+*.ttf
+*.woff
+
+!*.css
+!*.scss
+!*.less

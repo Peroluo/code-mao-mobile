@@ -1,14 +1,12 @@
 ---
 order: 0
-title:
-  zh-CN: '类型、尺寸'
-  en-US: 'Type, Size'
+title: '类型、尺寸'
 ---
 
 button
 
 ````jsx
-import { Button, WhiteSpace, WingBlank } from 'antd-mobile';
+import { Button, WhiteSpace, WingBlank } from 'lbk-common-components';
 
 const ButtonExample = () => (
   <WingBlank>

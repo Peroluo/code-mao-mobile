@@ -7,8 +7,7 @@ module.exports = Object.assign({}, commonConfig, {
     components: './components',
     docs: './docs',
     changelog: [
-      'CHANGELOG.zh-CN.md',
-      'CHANGELOG.en-US.md',
+      'CHANGELOG.md',
     ],
   },
   theme: './site/desktop/src',

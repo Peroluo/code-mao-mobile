@@ -7,7 +7,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
-                key: antd-mobile-{{ checksum "package.json" }}
+                key: lbk-common-components-{{ checksum "package.json" }}
             - run:
                 name: Install dependencies
                 command: npm i
@@ -43,7 +43,7 @@ jobs:
                       echo "Do not deploy site when tagging beta vesion"
                     fi
             - save_cache:
-                key: antd-mobile-{{ checksum "package.json" }}
+                key: lbk-common-components-{{ checksum "package.json" }}
                 paths:
                     - "node_modules"
 workflows:

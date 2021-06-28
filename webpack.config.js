@@ -7,7 +7,7 @@ const webpackConfig = getWebpackConfig(false);
 webpackConfig.forEach((config, index) => {
   if (index === 0) {
     config.plugins.push(new Visualizer({
-      filename: `../ant-design-analysis/${pkg.name}@${pkg.version}-stats.html`,
+      filename: `../analysis/${pkg.name}@${pkg.version}-stats.html`,
     }));
   }
 });

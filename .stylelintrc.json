@@ -1,0 +1,33 @@
+{
+    "extends": "stylelint-config-standard",
+    "plugins": ["stylelint-prettier"],
+    "ignoreFiles": ["**/*.js","**/*.ts","**/*.md"],
+    "rules": {
+        "unit-case":null,
+        "declaration-colon-space-after": "always",
+        "at-rule-empty-line-before": [ "always", {
+          "except": [
+            "after-same-name",
+            "inside-block",
+            "blockless-after-same-name-blockless",
+            "first-nested"
+          ],
+          "ignore": ["after-comment"]
+        } ],
+        "at-rule-no-unknown": null,
+        "max-nesting-depth": [4, {
+          "ignore": [
+            "blockless-at-rules"
+          ]
+        }],
+        "color-hex-case": null,
+        "function-parentheses-newline-inside": "never-multi-line",
+        "selector-pseudo-element-colon-notation": "single",
+        "selector-type-case": "lower",
+        "no-descending-specificity": null,
+        "selector-pseudo-class-no-unknown": [true, {
+          "ignorePseudoClasses": [ "global"]
+        }]
+      }
+  }
+  

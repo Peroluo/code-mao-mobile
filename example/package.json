@@ -1,0 +1,63 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "description": "组件库",
+  "scripts": {
+    "start": "yuumi serve",
+    "build": "yuumi build",
+    "production": "node ./bin/server.js",
+    "example": "yuumi serve ./example/index.tsx",
+    "cdn_upload": "./script/upload.sh",
+    "lint-fix": "eslint ./src --fix --ext  .js,.tsx,ts && stylelint \"src/**/*.scss\" --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && env-status-version-validate",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,ts,tsx}": [
+        "eslint",
+        "git add"
+      ],
+      "*.{css,scss}": [
+        "stylelint"
+      ]
+    },
+    "ignore": [
+      "bin/server.js",
+      "src/lib/**/*",
+      "mlz-pack.js",
+      "*.test.(j|t)s"
+    ]
+  },
+  "dependencies": {
+    "@cmao/mlz-config": "^1.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@frontend/yuumi": "0.3.0",
+    "@mlz/lint": "^1.1.10",
+    "@mlz/pack": "1.1.0",
+    "@types/classnames": "^2.2.9",
+    "@types/node": "^12.6.2",
+    "@types/react-dom": "^16.9.2",
+    "compression": "^1.7.4",
+    "cross-env": "^5.2.1",
+    "env-status": "^0.30.0",
+    "express": "^4.17.1",
+    "less-loader": "^5.0.0",
+    "postcss-pxtorem": "^4.0.1",
+    "stylelint": "^13.12.0",
+    "typescript": "^3.5.3"
+  },
+  "theme": {
+    "@hd": 2,
+    "@address-bg": "green"
+  }
+}

@@ -1,6 +1,4 @@
 const path = require('path');
-const enLocale = require('./en-US');
-const cnLocale = require('./zh-CN');
 
 const homeTmpl = './template/Home/index';
 const contentTmpl = './template/Content/index';
@@ -20,8 +18,6 @@ function pickerGenerator(module) {
 }
 
 module.exports = {
-  enLocale,
-  cnLocale,
   lazyLoad(nodePath, nodeValue) {
     if (typeof nodeValue === 'string') {
       return true;
@@ -61,9 +57,6 @@ module.exports = {
     component: './template/Layout/index',
     indexRoute: { component: homeTmpl },
     childRoutes: [{
-      path: 'index-cn',
-      component: homeTmpl,
-    }, {
       path: '/docs/practice/:children',
       component: contentTmpl,
     }, {

@@ -1,17 +1,11 @@
 /* eslint react/no-danger: 0 */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { FormattedMessage } from 'react-intl';
 import { Button, Modal, Radio, Tooltip, Icon } from 'antd';
 import { ping } from '../../../../utils';
 
 export default class Demo extends React.Component {
-  static contextTypes = {
-    intl: PropTypes.object,
-  }
-
   state = {
     fullscreen: false,
     lang: 'es6',
@@ -95,15 +89,14 @@ export default class Demo extends React.Component {
       style,
     } = this.props;
     const { lang, sourceCode } = this.state;
-    const { locale } = this.context.intl;
-    const localizedTitle = meta.title[locale] || meta.title;
-    const prefillStyle = `@import 'antd-mobile@2/dist/antd-mobile.min.css';\n\n${style || ''}`.replace(new RegExp(`#${meta.id}\\s*`, 'g'), '');
+    const localizedTitle = meta.title;
+    const prefillStyle = `@import 'lbk-common-components@2/dist/lbk-common-components.min.css';\n\n${style || ''}`.replace(new RegExp(`#${meta.id}\\s*`, 'g'), '');
 
     const js = sourceCode
       .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'rc-form';/, 'const { $1 } = window["rc-form"];')
       .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'array-tree-filter';/, 'const { $1 } = window["arrayTreeFilter"];')
-      .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'antd-mobile-demo-data';/, 'const { $1 } = window["antd-mobile-demo-data"];')
-      .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'antd-mobile';/, 'const { $1 } = window["antd-mobile"];');
+      .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'lbk-common-components-demo-data';/, 'const { $1 } = window["lbk-common-components-demo-data"];')
+      .replace(/import\s+\{\s+(.*)\s+\}\s+from\s+'lbk-common-components';/, 'const { $1 } = window["lbk-common-components"];');
 
     const codepenPrefillConfig = {
       title: `${localizedTitle} - Ant Design Mobile Demo`,
@@ -114,14 +107,14 @@ export default class Demo extends React.Component {
       js,
       css: prefillStyle,
       editors: '001',
-      css_external: 'https://unpkg.com/antd-mobile@2/dist/antd-mobile.min.css',
+      css_external: 'https://unpkg.com/lbk-common-components@2/dist/lbk-common-components.min.css',
       js_external: [
         'react@16/umd/react.production.min.js',
         'react-dom@16/umd/react-dom.production.min.js',
         'rc-form@1/dist/rc-form.min.js',
-        'antd-mobile@2/dist/antd-mobile.min.js',
+        'lbk-common-components@2/dist/lbk-common-components.min.js',
         'array-tree-filter@2',
-        'antd-mobile-demo-data@0.3',
+        'lbk-common-components-demo-data@0.3',
       ]
         .map(url => `https://unpkg.com/${url}`)
         .concat(['https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js'])
@@ -130,8 +123,8 @@ export default class Demo extends React.Component {
     };
     const riddlePrefillConfig = {
       title: `${localizedTitle} - Ant Design Mobile Demo`,
-      js: sourceCode.replace('from \'antd-mobile\'', 'from \'antd-mobile\''),
-      css: prefillStyle.replace('\'antd-mobile/', '\'antd-mobile/'),
+      js: sourceCode.replace('from \'lbk-common-components\'', 'from \'lbk-common-components\''),
+      css: prefillStyle.replace('\'lbk-common-components/', '\'lbk-common-components/'),
     };
     return Array.isArray(highlightedCode) ? (
       <div className="highlight">
@@ -139,14 +132,14 @@ export default class Demo extends React.Component {
           {this.state.showRiddleButton ? (
             <form action="//riddle.alibaba-inc.com/riddles/define" method="POST" target="_blank">
               <input type="hidden" name="data" value={JSON.stringify(riddlePrefillConfig)} />
-              <Tooltip title={<FormattedMessage id="app.demo.riddle" />}>
+              <Tooltip title={'在 Riddle 中打开'}>
                 <input type="submit" value="Create New Riddle with Prefilled Data" className="code-box-riddle" />
               </Tooltip>
             </form>
           ) : null}
           <form action="https://codepen.io/pen/define" method="POST" target="_blank">
             <input type="hidden" name="data" value={JSON.stringify(codepenPrefillConfig)} />
-            <Tooltip title={<FormattedMessage id="app.demo.codepen" />}>
+            <Tooltip title={''}>
               <input type="submit" value="Create New Pen with Prefilled Data" className="code-box-codepen" />
             </Tooltip>
           </form>
@@ -155,7 +148,7 @@ export default class Demo extends React.Component {
             onCopy={this.handleCodeCopied}
           >
             <Tooltip
-              title={<FormattedMessage id={`app.demo.${this.state.copied ? 'copied' : 'copy'}`} />}
+              title={`${this.state.copied ? '复制成功' : '复制代码'}`}
               visible={this.state.copyTooltipVisible}
               onVisibleChange={this.onCopyTooltipVisibleChange}
             >
@@ -210,9 +203,8 @@ export default class Demo extends React.Component {
       [className]: className,
     });
 
-    const locale = this.context.intl.locale;
-    const localizedTitle = meta.title[locale] || meta.title;
-    const localizeIntro = content[locale] || content;
+    const localizedTitle = meta.title;
+    const localizeIntro = content;
     const introChildren = utils.toReactComponent(['div'].concat(localizeIntro));
 
     const hsNode = highlightedStyle ? (
@@ -236,7 +228,7 @@ export default class Demo extends React.Component {
           onCancel={this.handleCancel}
           width={900}
           footer={[
-            <Button key="back" type="ghost" size="large" onClick={this.handleCancel}><FormattedMessage id="app.ComponentDoc.Modal.return" /></Button>,
+            <Button key="back" type="ghost" size="large" onClick={this.handleCancel}>返回</Button>,
           ]}
         >
           {this.renderDemoCode(highlightedCode, true)}

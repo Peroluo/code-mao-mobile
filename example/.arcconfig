@@ -1,0 +1,5 @@
+{
+  "phabricator.uri": "https://phab.srv.codemao.cn",
+  "arc.land.onto.default": "notexist",
+  "history.immutable": true
+}

@@ -16,6 +16,7 @@ const kitchenConfig = {
   htmlTemplate: path.join(__dirname, './kitchen/src/static/template.html'),
 };
 
+// 是否启用rem
 if (process.env.HD_ENV === 'hd') {
   kitchenConfig.postcssConfig = {
     plugins: [
@@ -24,7 +25,7 @@ if (process.env.HD_ENV === 'hd') {
         browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
       }),
       pxtoremPlugin({
-        rootValue: 50,
+        rootValue: 100,
         propList: ['*'],
       }),
     ],

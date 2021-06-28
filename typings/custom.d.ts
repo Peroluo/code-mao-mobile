@@ -1,6 +1,6 @@
 declare module 'classnames';
 
-declare module 'antd-mobile-demo-data';
+declare module 'lbk-common-components-demo-data';
 
 declare module 'rmc-list-view';
 

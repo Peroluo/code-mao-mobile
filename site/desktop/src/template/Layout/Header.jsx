@@ -1,20 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'bisheng/router';
-import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { Select, Menu, Row, Col, Icon, Button, AutoComplete, Input, Popover } from 'antd';
-import { version as antdVersion } from 'antd-mobile/package.json';
-import * as utils from '../../../../utils';
+import { Menu, Row, Col, Icon, AutoComplete, Input, Popover } from 'antd';
+import _config from '../../../../config';
 
 const { Option } = AutoComplete;
-const searchEngine = 'Google';
-const searchLink = 'https://www.google.com/#q=site:mobile.ant.design+';
 
 export default class Header extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired,
   }
 
   state = {
@@ -53,16 +48,11 @@ export default class Header extends React.Component {
   }
 
   handleSearch = (value) => {
-    if (value === searchEngine) {
-      window.location.href = `${searchLink}${this.state.inputValue}`;
-      return;
-    }
-
-    const { intl, router } = this.context;
+    const { router } = this.context;
     this.setState({
       inputValue: '',
     }, () => {
-      router.push({ pathname: utils.getLocalizedPathname(`${value}/`, intl.locale === 'zh-CN') });
+      router.push({ pathname: `${value}/` });
       this.searchInput.blur();
     });
   }
@@ -74,50 +64,22 @@ export default class Header extends React.Component {
   }
   handleSelectFilter = (value, option) => {
     const optionValue = option.props['data-label'];
-    return optionValue === searchEngine ||
-      optionValue.indexOf(value.toLowerCase()) > -1;
+    return optionValue.indexOf(value.toLowerCase()) > -1;
   }
 
-  handleLangChange = () => {
-    const { pathname } = this.props.location;
-    const currentProtocol = `${window.location.protocol}//`;
-    const currentHref = window.location.href.substr(currentProtocol.length);
-
-    if (utils.isLocalStorageNameSupported()) {
-      localStorage.setItem('locale', utils.isZhCN(pathname) ? 'en-US' : 'zh-CN');
-    }
-
-    window.location.href = currentProtocol + currentHref.replace(
-      window.location.pathname,
-      utils.getLocalizedPathname(pathname, !utils.isZhCN(pathname)),
-    );
-  }
-  handleVersionChange = (url) => {
-    const currentUrl = window.location.href;
-    const currentPathname = window.location.pathname;
-    window.location.href = currentUrl.replace(window.location.origin, url)
-      .replace(currentPathname, utils.getLocalizedPathname(currentPathname));
-  }
   render() {
     const { inputValue, menuMode, menuVisible } = this.state;
-    const {
-      location, picked, isFirstScreen, themeConfig,
-    } = this.props;
-    const docVersions = { ...themeConfig.docVersions, [antdVersion]: antdVersion };
-    const versionOptions = Object.keys(docVersions)
-      .map(version => <Option value={docVersions[version]} key={version}>{version}</Option>);
+    const { location, picked, isFirstScreen } = this.props;
     const { components } = picked;
     const module = location.pathname.replace(/(^\/|\/$)/g, '').split('/').slice(0, -1).join('/');
+
     let activeMenuItem = module || 'home';
+
     if (activeMenuItem === 'components' || location.pathname === 'changelog') {
       activeMenuItem = 'docs/react';
     }
 
-    const { locale } = this.context.intl;
-    const isZhCN = locale === 'zh-CN';
-    const excludedSuffix = isZhCN ? 'en-US.md' : 'zh-CN.md';
     const options = components
-      .filter(({ meta }) => !meta.filename.endsWith(excludedSuffix))
       .map(({ meta }) => {
         const pathSnippet = meta.filename.split('/')[1];
         const url = `/components/${pathSnippet}`;
@@ -129,10 +91,6 @@ export default class Header extends React.Component {
           </Option>
         );
       });
-    options.push(
-      <Option key="searchEngine" value={searchEngine} data-label={searchEngine}>
-        <FormattedMessage id="app.header.search" />
-      </Option>);
 
     const headerClassName = classNames({
       clearfix: true,
@@ -141,40 +99,21 @@ export default class Header extends React.Component {
     });
 
     const menu = [
-      <Button ghost size="small" onClick={this.handleLangChange} className="header-lang-button" key="lang-button">
-        <FormattedMessage id="app.header.lang" />
-      </Button>,
-      <Select
-        key="version"
-        className="version"
-        size="small"
-        dropdownMatchSelectWidth={false}
-        defaultValue={antdVersion}
-        onChange={this.handleVersionChange}
-        getPopupContainer={trigger => trigger.parentNode}
-      >
-        {versionOptions}
-      </Select>,
       <Menu className="menu-site" mode={menuMode} selectedKeys={[activeMenuItem]} id="nav" key="nav">
         <Menu.Item key="home">
-          <Link to={utils.getLocalizedPathname('/', isZhCN)}>
-            <FormattedMessage id="app.header.menu.home" />
+          <Link to={'/'}>
+            首页
           </Link>
         </Menu.Item>
         <Menu.Item key="docs/react">
-          <Link to={utils.getLocalizedPathname('/docs/react/introduce', isZhCN)}>
-            <FormattedMessage id="app.header.menu.components" />
+          <Link to={'/docs/react/introduce'}>
+            组件
           </Link>
         </Menu.Item>
-        {/* <Menu.Item key="pc">
-          <a href="//ant.design">
-            <FormattedMessage id="app.header.menu.pc" />
-          </a>
-        </Menu.Item> */}
       </Menu>,
     ];
 
-    const searchPlaceholder = locale === 'zh-CN' ? '搜索组件...' : 'Search Components...';
+    const searchPlaceholder = '搜索组件...';
     return (
       <header id="header" className={headerClassName}>
         {menuMode === 'inline' ? (
@@ -196,9 +135,9 @@ export default class Header extends React.Component {
         ) : null}
         <Row>
           <Col xxl={4} xl={5} lg={5} md={8} sm={24} xs={24}>
-            <Link to={utils.getLocalizedPathname('/', isZhCN)} id="logo">
+            <Link to={'/'} id="logo">
               <img alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-              <span>{themeConfig.siteTitle}</span>
+              <span>{_config.title}</span>
             </Link>
           </Col>
           <Col xxl={20} xl={19} lg={19} md={16} sm={0} xs={0}>

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'bisheng/router';
 import Menu from 'antd/lib/menu';
 import Row from 'antd/lib/row';
@@ -29,10 +28,6 @@ function getActiveMenuItem(props) {
 }
 
 export default class MainContent extends React.Component {
-  static contextTypes = {
-    intl: PropTypes.object.isRequired,
-  }
-
   constructor(props) {
     super(props);
     this.state = { openKeys: this.getSideBarOpenKeys(props) || [] };
@@ -45,7 +40,7 @@ export default class MainContent extends React.Component {
     if (this.currentModule === 'react') {
       this.currentModule = 'components';
     }
-    const locale = utils.isZhCN(pathname) ? 'zh-CN' : 'en-US';
+    const locale = 'zh-CN';
     if (prevModule !== this.currentModule) {
       const moduleData = getModuleData(nextProps);
       const shouldOpenKeys = Object.keys(utils.getMenuItems(moduleData, locale));
@@ -61,6 +56,7 @@ export default class MainContent extends React.Component {
 
   generateMenuItem(isTop, item) {
     const key = this.fileNameToPath(item.filename);
+    console.log(key);
     let text;
     if (isTop) {
       text = item.title || item.chinese || item.english;
@@ -120,7 +116,7 @@ export default class MainContent extends React.Component {
     const moduleName = /^components/.test(pathname) ?
       'components' : pathname.split('/').slice(0, 2).join('/');
     const moduleData = moduleName === 'components' || moduleName.includes('changelog') || moduleName === 'docs/react' ?
-      [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog].filter(item => item.meta.filename.includes(this.context.intl.locale)) :
+      [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog] :
       props.picked[moduleName];
 
     return moduleData;

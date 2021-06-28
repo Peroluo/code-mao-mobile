@@ -1,13 +1,8 @@
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { addLocaleData, IntlProvider } from 'react-intl';
 import { BackTop, Tooltip } from 'antd';
 import Header from './Header';
-import Footer from './Footer';
-import enLocale from '../../en-US';
-import cnLocale from '../../zh-CN';
-import * as utils from '../../../../utils';
 
 if (typeof window !== 'undefined') {
   /* eslint-disable global-require */
@@ -25,12 +20,8 @@ export default class Layout extends React.Component {
   };
   constructor(props) {
     super(props);
-    const { pathname } = props.location;
-    const appLocale = utils.isZhCN(pathname) ? cnLocale : enLocale;
-    addLocaleData(appLocale.data);
     this.state = {
       isFirstScreen: true,
-      appLocale,
     };
   }
 
@@ -60,18 +51,15 @@ export default class Layout extends React.Component {
 
   render() {
     const { children, ...restProps } = this.props;
-    const { appLocale, isFirstScreen } = this.state;
+    const { isFirstScreen } = this.state;
     return (
-      <IntlProvider locale={appLocale.locale} messages={appLocale.messages}>
-        <div className="page-wrapper">
-          <Header {...restProps} isFirstScreen={isFirstScreen} />
-          {cloneElement(children, { isFirstScreen, onEnterChange: this.onEnterChange })}
-          <Footer {...restProps} />
-          <Tooltip title={() => <p><a style={{ color: '#ffc600', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer" href="https://www.yuque.com/yuanfei.gyf/public/dv2z7r">欢迎加入 Ant Design Mobile <span aria-label="Smile" role="img">😊</span>&gt;&gt;</a></p>}>
-            <BackTop />
-          </Tooltip>
-        </div>
-      </IntlProvider>
+      <div className="page-wrapper">
+        <Header {...restProps} isFirstScreen={isFirstScreen} />
+        {cloneElement(children, { isFirstScreen, onEnterChange: this.onEnterChange })}
+        <Tooltip title={() => <p><a style={{ color: '#ffc600', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer" href="https://www.yuque.com/yuanfei.gyf/public/dv2z7r">欢迎加入 Ant Design Mobile <span aria-label="Smile" role="img">😊</span>&gt;&gt;</a></p>}>
+          <BackTop />
+        </Tooltip>
+      </div>
     );
   }
 }

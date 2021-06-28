@@ -1,38 +1,35 @@
 /* eslint react/no-danger: 0 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WhiteSpace from 'antd-mobile/lib/white-space';
-import 'antd-mobile/lib/white-space/style';
-import Button from 'antd-mobile/lib/button';
-import 'antd-mobile/lib/button/style';
-import WingBlank from 'antd-mobile/lib/wing-blank';
-import 'antd-mobile/lib/wing-blank/style';
-import NoticeBar from 'antd-mobile/lib/notice-bar';
-import 'antd-mobile/lib/notice-bar/style';
+import WhiteSpace from 'lbk-common-components/lib/white-space';
+import 'lbk-common-components/lib/white-space/style';
+import Button from 'lbk-common-components/lib/button';
+import 'lbk-common-components/lib/button/style';
+import WingBlank from 'lbk-common-components/lib/wing-blank';
+import 'lbk-common-components/lib/wing-blank/style';
+import NoticeBar from 'lbk-common-components/lib/notice-bar';
+import 'lbk-common-components/lib/notice-bar/style';
 import collect from 'bisheng/collect';
-import { getQuery } from '../../../../utils';
 
 @collect(async (nextProps) => {
   const { pathname } = nextProps.location;
-  const pageDataPath = pathname.replace('-cn', '').split('/');
+  const pageDataPath = pathname.split('/');
   const pageData = nextProps.utils.get(nextProps.data, pageDataPath);
   if (!pageData) {
     throw 404; // eslint-disable-line no-throw-literal
   }
-
-  const locale = getQuery('lang') || 'en-US';
   const pageDataPromise = typeof pageData === 'function' ?
-    pageData() : (pageData[locale] || pageData.index[locale] || pageData.index)();
+    pageData() : (pageData.index)();
   const demosFetcher = nextProps.utils.get(nextProps.data, ['components', nextProps.params.component, 'demo']);
   if (demosFetcher) {
     const [localizedPageData, demos] = await Promise.all([pageDataPromise, demosFetcher()]);
-    return { localizedPageData, demos, locale };
+    return { localizedPageData, demos };
   }
 
-  return { localizedPageData: await pageDataPromise, locale };
+  return { localizedPageData: await pageDataPromise };
 })
 
-export default class Demo extends React.Component {
+class Demo extends React.Component {
   goToPage = (name, index) => () => {
     window.location.hash = `${name}-demo-${index}`;
   }
@@ -47,7 +44,7 @@ export default class Demo extends React.Component {
   }
   render() {
     const {
-      demos, location, picked, themeConfig: config, locale,
+      demos, location, picked, themeConfig: config,
     } = this.props;
     let demoMeta;
     const name = this.props.params.component;
@@ -79,14 +76,14 @@ export default class Demo extends React.Component {
         <div key={`sub${index}`}>
           <WhiteSpace />
           <WingBlank>
-            <Button onClick={this.goToPage(name, index)}>{item.meta.title[locale === 'en-US' ? 'en-US' : 'zh-CN']}</Button>
+            <Button onClick={this.goToPage(name, index)}>{item.meta.title}</Button>
           </WingBlank>
         </div>
       ));
     } else {
       demoContent = demoSort.map((i, index) => (
         <div className="demo-preview-item" id={`${name}-demo-${i.meta.order}`} key={index}>
-          <div className="demoTitle">{i.meta.title[locale]}</div>
+          <div className="demoTitle">{i.meta.title}</div>
           <div className="demoContainer">{i.preview(React, ReactDOM)}</div>
           {i.style ? <style dangerouslySetInnerHTML={{ __html: i.style }} /> : null}
         </div>
@@ -99,7 +96,7 @@ export default class Demo extends React.Component {
     if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
       style.minHeight = document.documentElement.clientHeight;
     } else if (/(tabs|swipe-action|pull-to-refresh)/i.test(window.location.hash.toLowerCase())) {
-      touchNoticeText = locale === 'en-US' ? 'This component only support Touch Events, USE mobile mode open this page please.' : '该组件只支持Touch事件，请使用移动模式/设备打开此页。';
+      touchNoticeText = '该组件只支持Touch事件，请使用移动模式/设备打开此页。';
     }
 
     const isLocalMode = window.location.port;
@@ -110,10 +107,7 @@ export default class Demo extends React.Component {
         <div className="demoName">
           <a className="icon" href={`/${linkUrl}${window.location.search}`} />
           {demoMeta.title}
-          {
-            (!demoMeta.subtitle || locale === 'en-US') ?
-              null : <span className="ch">{demoMeta.subtitle}</span>
-          }
+          <span className="ch">{demoMeta.subtitle}</span>
         </div>
         {
           touchNoticeText &&
@@ -124,3 +118,4 @@ export default class Demo extends React.Component {
     );
   }
 }
+export default Demo;

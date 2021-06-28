@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name=”renderer” content=”webkit”>
+  <title>组件库</title>
+  <style>
+      *{
+          margin: 0;
+          padding: 0;
+      }
+  </style>
+    <script>
+        function setHtmlFont() {
+          const docEl = document.documentElement;
+    
+          // adjust body font size
+          function setBodyFontSize() {
+            if (document.body) {
+              document.body.style.fontSize = '16px';
+            } else {
+              document.addEventListener('DOMContentLoaded', setBodyFontSize);
+            }
+          }
+          setBodyFontSize();
+    
+          function setRemUnit() {
+            let rem = 16;
+            rem = docEl.offsetWidth / 750 * 100;
+            rem = rem > 87 ? 87 : rem;
+            docEl.style.fontSize = `${rem}px`;
+          }
+    
+          setRemUnit();
+    
+          // reset rem unit on page resize
+          window.addEventListener('resize', setRemUnit);
+          window.addEventListener('pageshow', function pageShow(e) {
+            if (e.persisted) {
+              setRemUnit();
+            }
+          });
+        }
+        setHtmlFont();
+      </script>
+  <%= htmlWebpackPlugin.options.front_config %>
+  <!--configArea--><!--endOfConfigArea-->
+  <%= htmlWebpackPlugin.options.loading.css %>
+  <script>
+    function setHtmlFont() {
+      const docEl = document.documentElement;
+
+      // adjust body font size
+      function setBodyFontSize() {
+        if (document.body) {
+          document.body.style.fontSize = '16px';
+        } else {
+          document.addEventListener('DOMContentLoaded', setBodyFontSize);
+        }
+      }
+      setBodyFontSize();
+
+      function setRemUnit() {
+        let rem = 16;
+        rem = docEl.offsetWidth / 750 * 100;
+        rem = rem > 87 ? 87 : rem;
+        docEl.style.fontSize = `${rem}px`;
+      }
+
+      setRemUnit();
+
+      // reset rem unit on page resize
+      window.addEventListener('resize', setRemUnit);
+      window.addEventListener('pageshow', function pageShow(e) {
+        if (e.persisted) {
+          setRemUnit();
+        }
+      });
+    }
+    setHtmlFont();
+  </script>
+</head>
+<body>
+  <div id="root" />
+</body>
+</html>
